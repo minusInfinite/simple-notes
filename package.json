@@ -7,6 +7,10 @@
     "author": "minusinfinite <ashley@minusinfinite.net> (https://github.com/minusInfinite)",
     "license": "MIT",
     "packageManager": "yarn@3.0.1",
+    "engines": {
+        "yarn": "3.x",
+        "node": "14.x"
+    },
     "cacheDirectories": [
         "db",
         "public",
