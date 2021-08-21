@@ -2,10 +2,12 @@ const notes = require("express").Router()
 const { readDB, writeDB, updateDB } = require("../utils/filesys")
 const { v4: uuidv4 } = require("uuid")
 
+//read the JSON file and send to the client
 notes.get("/", (req, res) => {
     readDB("./db/db.json").then((data) => res.json(JSON.parse(data)))
 })
 
+//receive data from the client and append it to a JSON file
 notes.post("/", (req, res) => {
     const { title, text } = req.body
 
@@ -22,6 +24,7 @@ notes.post("/", (req, res) => {
     }
 })
 
+//Actions taken when the client requests to delete data
 notes.delete("/:note_id", (req, res) => {
     if (req.params.note_id) {
         const noteId = req.params.note_id
@@ -36,8 +39,6 @@ notes.delete("/:note_id", (req, res) => {
             const newCx = cx.filter((el) => {
                 return el.id !== noteId
             })
-
-            console.log(newCx)
 
             writeDB("./db/db.json", newCx)
         }
